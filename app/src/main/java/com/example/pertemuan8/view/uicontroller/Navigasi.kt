@@ -1,4 +1,4 @@
-package com.example.myarsitekturmvvm.view.uicontroller
+package com.example.pertemuan8.view.uicontroller
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.pertemuan8.model.DataJK.JenisK
 import com.example.pertemuan8.view.FormSiswa
+import com.example.pertemuan8.view.TampilSiswa
 import com.example.pertemuan8.viewmodel.SiswaViewModel
 
 enum class Navigasi {
@@ -49,6 +50,19 @@ fun SiswaApp(
                     }
                 )
             }
+            composable(route = Navigasi.Detail.name){
+                TampilSiswa(
+                    //edit 5 : parameter statusUiSiswa
+                    statusUiSiswa = uiState.value,
+                    onBackButtonClicked = { cancelAndBackToFormulir(navController) }
+                )
+            }
         }
     }
+}
+
+private fun cancelAndBackToFormulir(
+    navController: NavHostController
+) {
+    navController.popBackStack(Navigasi.Formulir.name, inclusive = false)
 }
